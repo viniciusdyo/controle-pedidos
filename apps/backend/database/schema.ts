@@ -8,7 +8,18 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
 export class AuthAccessTokenSchema extends BaseModel {
-  static $columns = ['abilities', 'createdAt', 'expiresAt', 'hash', 'id', 'lastUsedAt', 'name', 'tokenableId', 'type', 'updatedAt'] as const
+  static $columns = [
+    'abilities',
+    'createdAt',
+    'expiresAt',
+    'hash',
+    'id',
+    'lastUsedAt',
+    'name',
+    'tokenableId',
+    'type',
+    'updatedAt',
+  ] as const
   $columns = AuthAccessTokenSchema.$columns
   @column()
   declare abilities: string
@@ -30,6 +41,95 @@ export class AuthAccessTokenSchema extends BaseModel {
   declare type: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+}
+
+export class ClienteSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'nome', 'telefone', 'updatedAt'] as const
+  $columns = ClienteSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare nome: string
+  @column()
+  declare telefone: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class PedidoItenSchema extends BaseModel {
+  static $columns = [
+    'createdAt',
+    'id',
+    'nome',
+    'pedidoId',
+    'produtoId',
+    'quantidade',
+    'updatedAt',
+    'valorUnidade',
+  ] as const
+  $columns = PedidoItenSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare nome: string
+  @column()
+  declare pedidoId: number | null
+  @column()
+  declare produtoId: number | null
+  @column()
+  declare quantidade: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare valorUnidade: number
+}
+
+export class PedidoSchema extends BaseModel {
+  static $columns = [
+    'cancelado',
+    'clienteId',
+    'createdAt',
+    'id',
+    'status',
+    'updatedAt',
+    'valorTotal',
+  ] as const
+  $columns = PedidoSchema.$columns
+  @column()
+  declare cancelado: boolean | null
+  @column()
+  declare clienteId: number | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare status: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare valorTotal: number
+}
+
+export class ProdutoSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'nome', 'status', 'updatedAt', 'valorUnidade'] as const
+  $columns = ProdutoSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare nome: string
+  @column()
+  declare status: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare valorUnidade: number
 }
 
 export class UserSchema extends BaseModel {
