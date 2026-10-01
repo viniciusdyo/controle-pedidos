@@ -1,0 +1,28 @@
+<table class="min-w-full text-black">
+  <thead>
+      <tr>
+        @for(col of colunas; track col.campo){
+          <th>{{col.textoCabecalho}}</th>
+        }
+        <th>Editar</th>
+      </tr>
+  </thead>
+  <tbody >
+    @for(row of dados; track row.id){
+      <tr>
+        @for(col of colunas; track col.campo){
+          <td>{{row[col.campo]}}</td>
+        }
+        <td>
+          <button type="button" class="p-3 bg-amber-200" (click)="onEditarClick(row)">Editar</button>
+        </td>
+      </tr>
+    } @empty {
+      <tr>
+        <td [attr.colspan]="colunas.length + 1">
+          Nenhum registro encontrado.
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>

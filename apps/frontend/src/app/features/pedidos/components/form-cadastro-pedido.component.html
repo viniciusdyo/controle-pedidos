@@ -1,0 +1,81 @@
+<form [formGroup]="formPedido" (ngSubmit)="salvarPedido()" class="flex flex-col gap-y-4">
+  <div class="flex flex-col">
+    <label>
+      Cliente
+    </label>
+    <select formControlName="clienteId" class="border p-2 rounded">
+      <option [ngValue]="null" disabled selected>Selecione um Cliente para o Pedido</option>
+
+      @for(cliente of listaClientes(); track cliente.id){
+        <option [ngValue]="cliente.id">{{cliente.nome}}</option>
+      }
+
+    </select>
+    @if(formPedido.get('clienteId')?.invalid && formPedido.get('clienteId')?.touched){
+      <span class="text-red-600 text-sm">
+        Seleciona um Cliente válido!
+      </span>
+    }
+  </div>
+  <div class="flex flex-col">
+    <label>
+      Status do Pedido
+    </label>
+    <select formControlName="status" class="border p-2 rounded">
+      <option value="" disabled selected>Selecione um Status</option>
+
+      @for(status of listaStatus; track status){
+        <option [value]="status">{{status}}</option>
+      }
+
+    </select>
+    @if(formPedido.get('status')?.invalid && formPedido.get('status')?.touched){
+      <span class="text-red-600 text-sm">
+        Selecione um status válido.
+      </span>
+    }
+  </div>
+  <div class="flex flex-col gap-y-2">
+    <div class="flex justify-between">
+      <h3>Itens do Pedido</h3>
+      <button class="px-2 py-1 bg-green-500 rounded text-white font-semibold text-lg" (click)="adicionarItem()"> + Adicionar Item</button>
+    </div>
+    <div>
+      @if(itensPedido.errors?.['minlength'] && itensPedido.touched) {
+        <span class="text-red-500 text-sm mb-2">Adicione pelo menos um item ao pedido.</span>
+      }
+      <div formArrayName="pedidoItens" class="flex flex-col gap-y-3">
+        @for(item of itensPedido.controls; track $index) {
+          <div [formGroupName]="$index" class="flex gap-2 items-end border p-2 rounded bg-white">
+            <div class="flex-1 flex flex-col">
+              <label>Produto:</label>
+              <select formControlName="produtoId" class="border p-2 rounded">
+
+                <option [ngValue]="null" disabled>Selecione um produto</option>
+
+                @for(produto of listaProdutos(); track produto.id) {
+                  <option [ngValue]="produto.id">{{ produto.nome }}</option>
+                }
+              </select>
+            </div>
+
+            <div class="w-24 flex flex-col">
+              <label>Quantidade:</label>
+              <input type="number" formControlName="quantidade" min="1" class="border p-2 rounded">
+            </div>
+
+            <button type="button" (click)="removerItem($index)" class="px-2 py-1 bg-red-500 rounded text-white font-semibold text-lg">
+              &times;
+            </button>
+          </div>
+          } @empty {
+            <p class="text-gray-500 text-center py-4">Nenhum item adicionado.</p>
+          }
+        </div>
+    </div>
+  </div>
+  <div class="flex gap-3 mt-3 justify-end">
+    <button type="submit" class="px-2 py-1 bg-green-500 rounded text-white font-semibold text-lg">Salvar</button>
+    <button type="button" class="px-2 py-1 bg-red-500 rounded text-white font-semibold text-lg" (click)="cancelar()">Cancelar</button>
+  </div>
+</form>

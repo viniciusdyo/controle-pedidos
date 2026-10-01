@@ -1,0 +1,21 @@
+<button type="button" class="p-3 bg-blue-600 text-white" (click)="abrirModalCadastro()">Cadastrar Cliente</button>
+
+<div>
+  @if(carregandoCadastro()){
+    <p>Carregando...</p>
+  } @else {
+    <app-table [colunas]="colunasTabela" [dados]="listaClientes()" (edicao)="abrirModalEdicao($event)"></app-table>
+  }
+</div>
+
+@if(mostraModalCadastro()){
+<app-modal [titulo]="tituloModalCadastro" (fechou)="esconderModalCadastro()">
+  <app-form-cadastro-cliente (cancelou)="esconderModalCadastro()"></app-form-cadastro-cliente>
+</app-modal>
+}
+
+@if(mostraModalEdicao()){
+<app-modal [titulo]="tituloModalEdicao" (fechou)="esconderModalEdicao()">
+  <app-form-edicao-cliente [clienteId]="clienteId()" (cancelou)="esconderModalEdicao()"></app-form-edicao-cliente>
+</app-modal>
+}

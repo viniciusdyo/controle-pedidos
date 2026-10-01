@@ -1,0 +1,25 @@
+<form [formGroup]="formPedido" (ngSubmit)="salvarEdicao()" class="flex flex-col gap-y-4">
+  <div class="flex flex-col">
+    <label>
+      Status do Pedido
+    </label>
+    <select formControlName="status" class="border p-2 rounded">
+      <option value="" disabled selected>Selecione um Status</option>
+
+      @for(status of listaStatus; track status){
+        <option [value]="status">{{status}}</option>
+      }
+
+    </select>
+    @if(formPedido.get('status')?.invalid && formPedido.get('status')?.touched){
+      <span class="text-red-600 text-sm">
+        Selecione um status válido.
+      </span>
+    }
+  </div>
+
+  <div class="flex gap-3 mt-3 justify-end">
+    <button type="submit" class="px-2 py-1 bg-green-500 rounded text-white font-semibold text-lg">Salvar</button>
+    <button type="button" class="px-2 py-1 bg-red-500 rounded text-white font-semibold text-lg" (click)="cancelar()">Cancelar</button>
+  </div>
+</form>

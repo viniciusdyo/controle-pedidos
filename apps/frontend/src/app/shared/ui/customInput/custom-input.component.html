@@ -1,0 +1,10 @@
+<div>
+  @if(label){
+    <div>
+      <label>{{label}}</label>
+    </div>
+  }
+  <div>
+    <input [type]="type" [value]="value" [disabled]="disabled" (input)="onInput($event)" (blur)="onTouched()" />
+  </div>
+</div>

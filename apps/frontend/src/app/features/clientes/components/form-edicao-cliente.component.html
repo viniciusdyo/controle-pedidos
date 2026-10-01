@@ -1,0 +1,28 @@
+<form [formGroup]="formCliente" (ngSubmit)="salvarEdicao()" class="flex flex-col gap-y-4">
+  <div class="flex flex-col gap-y-2">
+    <label>
+      Nome
+    </label>
+    <input type="text" formControlName="nome" class="border p-2 rounded" placeholder="Ex.: Vinicius Dyonisio" />
+    @if(formCliente.get('nome')?.invalid && formCliente.get('nome')?.touched){
+      <span class="text-red-500 text-sm">
+        O nome deve conter entre 3 e 250 caracteres
+      </span>
+    }
+  </div>
+  <div class="flex flex-col gap-y-2">
+    <label>
+      Telefone
+    </label>
+    <input type="text" formControlName="telefone" class="border p-2 rounded" placeholder="013987654321" />
+    @if(formCliente.get('telefone')?.invalid && formCliente.get('telefone')?.touched){
+      <span class="text-red-500 text-sm">
+        O telefone deve conter entre 12 e 13 caracteres
+      </span>
+    }
+  </div>
+  <div class="flex gap-3 mt-3 justify-end">
+    <button type="submit" class="px-2 py-1 bg-green-500 rounded text-white font-semibold text-lg">Salvar</button>
+    <button type="button" class="px-2 py-1 bg-red-500 rounded text-white font-semibold text-lg" (click)="cancelar()">Cancelar</button>
+  </div>
+</form>
