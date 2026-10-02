@@ -61,7 +61,7 @@ export default class ClienteService {
     }
   }
   public async listarClientes() {
-    const clientes = await Cliente.all()
+    const clientes = await Cliente.query().orderBy('id', 'asc')
     return clientes
   }
 

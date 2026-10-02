@@ -60,7 +60,7 @@ export default class ProdutoService {
   }
 
   public async listarProdutos() {
-    const produtos = await Produto.all()
+    const produtos = await Produto.query().orderBy('id', 'asc')
     return produtos
   }
 
