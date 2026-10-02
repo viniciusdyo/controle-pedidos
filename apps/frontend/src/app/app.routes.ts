@@ -8,11 +8,11 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'pedidos',
         pathMatch: 'full',
       },
       {
-        path: 'home',
+        path: 'clientes',
         loadComponent: () =>
           import('./features/clientes/pages/listar-clientes.component').then(
             (c) => c.ListarClientesComponent,

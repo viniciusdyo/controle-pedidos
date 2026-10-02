@@ -1,10 +1,20 @@
-<div class="flex h-screen p-2">
-  <main class="flex flex-col gap-y-4">
-    <header class="font-bold">
-      <h1>
-        Controle de Pedidos
-      </h1>
-    </header>
+<div class="flex flex-col h-screen w-screen">
+  <header class="w-full bg-gray-100 p-4 rounded-2xl">
+    <nav>
+      <ul class="flex flex-row gap-x-4">
+        <li>
+          <a routerLink="/pedidos" routerLinkActive="font-bold" [routerLinkActiveOptions]="{ exact: true }">Pedidos</a>
+        </li>
+        <li>
+          <a routerLink="/clientes" routerLinkActive="font-bold" [routerLinkActiveOptions]="{ exact: true }">Clientes</a>
+        </li>
+        <li>
+          <a routerLink="/produtos" routerLinkActive="font-bold" [routerLinkActiveOptions]="{ exact: true }">Produtos</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main class="flex flex-col gap-y-4 p-4">
     <div>
       <router-outlet></router-outlet>
     </div>
