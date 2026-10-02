@@ -3,13 +3,20 @@ import { ModalComponent } from '../../../shared/ui/modal/modal.component';
 import { TableComponent } from '../../../shared/ui/table/table.component';
 import { FormCadastroPedidoComponent } from '../components/form-cadastro-pedido.component';
 import { FormEdicaoPedidoComponent } from '../components/form-edicao-pedido.component';
+import { PedidoDetalhesComponent } from '../components/pedido-detalhes.components';
 import { Pedido } from '../interfaces/pedido.model';
 import { PedidoService } from '../services/pedido.service';
 
 @Component({
   selector: 'app-listar-pedidos',
   standalone: true,
-  imports: [TableComponent, ModalComponent, FormCadastroPedidoComponent, FormEdicaoPedidoComponent],
+  imports: [
+    TableComponent,
+    ModalComponent,
+    FormCadastroPedidoComponent,
+    FormEdicaoPedidoComponent,
+    PedidoDetalhesComponent,
+  ],
   templateUrl: './listar-pedidos.component.html',
 })
 export class ListarPedidosComponent implements OnInit {
@@ -38,12 +45,30 @@ export class ListarPedidosComponent implements OnInit {
 
   tituloModalEdicao = 'Editar Pedido';
   mostraModalEdicao = signal(false);
+  abrirModalEdicao(pedido: Pedido) {
+    this.pedidoId.set(pedido.id);
+    this.mostraModalEdicao.set(true);
+  }
 
+  esconderModalEdicao() {
+    this.mostraModalEdicao.set(false);
+  }
+
+  tituloModalDetalhes = 'Detalhes do Pedido';
+  mostraModalDetalhes = signal(false);
+
+  pedidoId = signal(0);
+  abrirModalDetalhes(pedido: Pedido) {
+    this.pedidoId.set(pedido.id);
+    this.mostraModalDetalhes.set(true);
+  }
+  esconderModalDetalhes() {
+    this.mostraModalDetalhes.set(false);
+  }
   carregandoCadastro = signal(false);
   carregandoEdicao = signal(false);
 
   listaPedidos = signal<Pedido[]>([]);
-  pedidoId = signal(0);
 
   carregarPedidos() {
     this.carregandoCadastro.set(true);
@@ -58,14 +83,5 @@ export class ListarPedidosComponent implements OnInit {
         this.carregandoCadastro.set(false);
       },
     });
-  }
-
-  abrirModalEdicao(pedido: Pedido) {
-    this.pedidoId.set(pedido.id);
-    this.mostraModalEdicao.set(true);
-  }
-
-  esconderModalEdicao() {
-    this.mostraModalEdicao.set(false);
   }
 }

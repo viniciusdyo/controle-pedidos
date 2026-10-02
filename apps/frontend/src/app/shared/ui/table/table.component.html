@@ -5,6 +5,9 @@
           <th>{{col.textoCabecalho}}</th>
         }
         <th>Editar</th>
+        @if(detalhes.observers.length > 0){
+          <th>Detalhes</th>
+        }
       </tr>
   </thead>
   <tbody >
@@ -16,7 +19,12 @@
         <td>
           <button type="button" class="p-3 bg-amber-200" (click)="onEditarClick(row)">Editar</button>
         </td>
-      </tr>
+        @if(detalhes.observers.length > 0){
+          <td>
+            <button type="button" class="p-3 bg-blue-200" (click)="onDetalhesClick(row)">Detalhes</button>
+          </td>
+        }
+        </tr>
     } @empty {
       <tr>
         <td [attr.colspan]="colunas.length + 1">

@@ -1,0 +1,25 @@
+@if (pedido(); as ped) {
+  <div class="flex flex-col gap-y-3">
+    <div class="flex flex-row gap-x-3">
+      <app-custom-input label="ID" [value]="ped.id" [readonly]="true" />
+      <app-custom-input label="Cliente" [value]="ped.cliente?.nome || 'Cliente não encontrado'" [readonly]="true" />
+      <app-custom-input label="Criado em" [type]="'datetime-local'" [value]="ped.createdAt | date:'yyyy-MM-ddTHH:mm'" [readonly]="true" />
+      <app-custom-input label="Última atualização" [type]="'datetime-local'" [value]="ped.updatedAt | date:'yyyy-MM-ddTHH:mm'" [readonly]="true" />
+    </div>
+
+    <div class="flex flex-row gap-x-3">
+      <app-custom-input label="Status" [value]="ped.status" [readonly]="true" />
+      <app-custom-input label="Valor Total" [value]="ped.valorTotal" [readonly]="true" />
+    </div>
+
+    @for(item of ped.pedidoItens; track item.id) {
+      <div class="flex flex-row gap-x-3">
+        <app-custom-input label="Produto" [value]="item.nome" [readonly]="true" />
+        <app-custom-input label="Quantidade" [value]="item.quantidade" [readonly]="true" />
+        <app-custom-input label="Valor Unitário" [value]="item.valorUnidade" [readonly]="true" />
+      </div>
+    }
+  </div>
+} @else {
+  <p class="text-center w-full text-gray-900">Carregando...</p>
+}

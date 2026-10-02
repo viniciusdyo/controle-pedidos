@@ -9,6 +9,11 @@ export class TableComponent {
   @Input() colunas: { textoCabecalho: string; campo: string }[] = [];
   @Input() dados: any[] = [];
   @Output() edicao = new EventEmitter<any>();
+  @Output() detalhes = new EventEmitter<any>();
+
+  onDetalhesClick(row: any) {
+    this.detalhes.emit(row);
+  }
 
   onEditarClick(row: any) {
     this.edicao.emit(row);
