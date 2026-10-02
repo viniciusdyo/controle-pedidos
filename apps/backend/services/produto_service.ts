@@ -1,6 +1,7 @@
 import BusinessRuleException from '#exceptions/business_rule_exception'
 import Produto from '#models/produto'
 import {
+  type buscarProdutoPorIdValidator,
   type criarProdutoValidator,
   type editarProdutoValidator,
 } from '#validators/produto_validator'
@@ -9,6 +10,7 @@ import { type Infer } from '@vinejs/vine/types'
 
 type CriarProdutoPayload = Infer<typeof criarProdutoValidator>
 type EditarProdutoPayload = Infer<typeof editarProdutoValidator>
+type BuscarProdutoPorIdPayload = Infer<typeof buscarProdutoPorIdValidator>
 
 export default class ProdutoService {
   public async criarProduto(payload: CriarProdutoPayload) {
@@ -60,5 +62,10 @@ export default class ProdutoService {
   public async listarProdutos() {
     const produtos = await Produto.all()
     return produtos
+  }
+
+  public async buscarClientePorId(payload: BuscarProdutoPorIdPayload) {
+    const produto = await Produto.findOrFail(payload.id)
+    return produto
   }
 }

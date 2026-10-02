@@ -55,6 +55,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/access_tokens_controller').default['destroy']>>>
     }
   }
+  'produtos.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/produtos/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQueryForGet<InferInput<(typeof import('#validators/produto_validator').buscarProdutoPorIdValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/produtos_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/produtos_controller').default['show']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
   'produtos.index': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/produtos'
@@ -89,6 +101,18 @@ export interface Registry {
       query: ExtractQuery<InferInput<(typeof import('#validators/produto_validator').editarProdutoValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/produtos_controller').default['edit']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/produtos_controller').default['edit']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'clientes.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/clientes/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQueryForGet<InferInput<(typeof import('#validators/cliente_validator').buscarClientePorIdValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/clientes_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/clientes_controller').default['show']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'clientes.index': {

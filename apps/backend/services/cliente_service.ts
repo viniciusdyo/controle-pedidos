@@ -1,6 +1,7 @@
 import BusinessRuleException from '#exceptions/business_rule_exception'
 import Cliente from '#models/cliente'
 import {
+  type buscarClientePorIdValidator,
   type criarClienteValidator,
   type editarClienteValidator,
 } from '#validators/cliente_validator'
@@ -9,6 +10,7 @@ import { type Infer } from '@vinejs/vine/types'
 
 type CriarClientePayload = Infer<typeof criarClienteValidator>
 type EditarClientePayload = Infer<typeof editarClienteValidator>
+type BuscarClientePorIdPayload = Infer<typeof buscarClientePorIdValidator>
 
 export default class ClienteService {
   public async criarCliente(payload: CriarClientePayload) {
@@ -61,5 +63,10 @@ export default class ClienteService {
   public async listarClientes() {
     const clientes = await Cliente.all()
     return clientes
+  }
+
+  public async buscarClientePorId(payload: BuscarClientePorIdPayload) {
+    const cliente = await Cliente.findOrFail(payload.id)
+    return cliente
   }
 }

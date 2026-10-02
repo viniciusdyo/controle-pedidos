@@ -14,9 +14,11 @@ export default class PedidosController {
 
   async store({ request, response }: HttpContext) {
     const pedidoPayload = await request.validateUsing(criarPedidoValidator)
+    console.log(pedidoPayload)
 
     const pedido = await this.pedidoService.criarPedido(pedidoPayload)
 
+    console.log('resultado pedido: ', pedido)
     return response.created({
       sucesso: true,
       dados: pedido,

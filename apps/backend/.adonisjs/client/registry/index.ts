@@ -30,6 +30,12 @@ const routes = {
     tokens: [{"old":"/api/v1/account/logout","type":0,"val":"api","end":""},{"old":"/api/v1/account/logout","type":0,"val":"v1","end":""},{"old":"/api/v1/account/logout","type":0,"val":"account","end":""},{"old":"/api/v1/account/logout","type":0,"val":"logout","end":""}],
     types: placeholder as Registry['profile.access_tokens.destroy']['types'],
   },
+  'produtos.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/produtos/:id',
+    tokens: [{"old":"/api/v1/produtos/:id","type":0,"val":"api","end":""},{"old":"/api/v1/produtos/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/produtos/:id","type":0,"val":"produtos","end":""},{"old":"/api/v1/produtos/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['produtos.show']['types'],
+  },
   'produtos.index': {
     methods: ["GET","HEAD"],
     pattern: '/api/v1/produtos',
@@ -47,6 +53,12 @@ const routes = {
     pattern: '/api/v1/produtos',
     tokens: [{"old":"/api/v1/produtos","type":0,"val":"api","end":""},{"old":"/api/v1/produtos","type":0,"val":"v1","end":""},{"old":"/api/v1/produtos","type":0,"val":"produtos","end":""}],
     types: placeholder as Registry['produtos.edit']['types'],
+  },
+  'clientes.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/clientes/:id',
+    tokens: [{"old":"/api/v1/clientes/:id","type":0,"val":"api","end":""},{"old":"/api/v1/clientes/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/clientes/:id","type":0,"val":"clientes","end":""},{"old":"/api/v1/clientes/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['clientes.show']['types'],
   },
   'clientes.index': {
     methods: ["GET","HEAD"],

@@ -1,4 +1,8 @@
-import { criarClienteValidator, editarClienteValidator } from '#validators/cliente_validator'
+import {
+  buscarClientePorIdValidator,
+  criarClienteValidator,
+  editarClienteValidator,
+} from '#validators/cliente_validator'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 import ClienteService from '../../services/cliente_service.ts'
@@ -31,6 +35,15 @@ export default class ClientesController {
 
     const cliente = await this.clienteService.editarCliente(clientePayload)
 
+    return response.ok({
+      sucesso: true,
+      dados: cliente,
+    })
+  }
+
+  async show({ params, response }: HttpContext) {
+    const idCliente = await buscarClientePorIdValidator.validate(params)
+    const cliente = await this.clienteService.buscarClientePorId(idCliente)
     return response.ok({
       sucesso: true,
       dados: cliente,

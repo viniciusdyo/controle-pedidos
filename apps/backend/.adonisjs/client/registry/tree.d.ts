@@ -19,11 +19,13 @@ export interface ApiDefinition {
     }
   }
   produtos: {
+    show: typeof routes['produtos.show']
     index: typeof routes['produtos.index']
     store: typeof routes['produtos.store']
     edit: typeof routes['produtos.edit']
   }
   clientes: {
+    show: typeof routes['clientes.show']
     index: typeof routes['clientes.index']
     store: typeof routes['clientes.store']
     edit: typeof routes['clientes.edit']

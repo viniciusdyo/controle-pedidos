@@ -33,7 +33,6 @@ export default class PedidoService {
         const produto = await Produto.findOrFail(item.produtoId, { client: transacao })
 
         if (produto.status === 'inativo') {
-          await transacao.rollback()
           throw new BusinessRuleException(
             'O produtos inativos não podem ser inseridos no pedido.',
             { status: 400 }
@@ -70,7 +69,6 @@ export default class PedidoService {
       if (error instanceof BusinessRuleException) {
         throw error
       }
-
       throw new BusinessRuleException('Erro interno ao processar o pedido.', { status: 500 })
     }
   }

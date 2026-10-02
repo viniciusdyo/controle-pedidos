@@ -14,3 +14,9 @@ export const editarClienteValidator = vine.create(
     telefone: vine.string().minLength(11).maxLength(12),
   })
 )
+
+export const buscarClientePorIdValidator = vine.create(
+  vine.object({
+    id: vine.number(),
+  })
+)

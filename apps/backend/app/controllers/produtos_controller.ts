@@ -1,6 +1,10 @@
 // import type { HttpContext } from '@adonisjs/core/http'
 
-import { criarProdutoValidator, editarProdutoValidator } from '#validators/produto_validator'
+import {
+  buscarProdutoPorIdValidator,
+  criarProdutoValidator,
+  editarProdutoValidator,
+} from '#validators/produto_validator'
 import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
 import ProdutoService from '../../services/produto_service.ts'
@@ -30,6 +34,15 @@ export default class ProdutosController {
     const produtoPayload = await request.validateUsing(editarProdutoValidator)
     const produto = await this.produtoService.editarProduto(produtoPayload)
 
+    return response.ok({
+      sucesso: true,
+      dados: produto,
+    })
+  }
+
+  async show({ params, response }: HttpContext) {
+    const produtoPayload = await buscarProdutoPorIdValidator.validate(params)
+    const produto = await this.produtoService.buscarClientePorId(produtoPayload)
     return response.ok({
       sucesso: true,
       dados: produto,

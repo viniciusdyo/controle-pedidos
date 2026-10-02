@@ -35,11 +35,13 @@ router
       .use(middleware.auth())
 
     router.group(() => {
+      router.get('produtos/:id', [controllers.Produtos, 'show'])
       router.get('produtos', [controllers.Produtos, 'index'])
       router.post('produtos', [controllers.Produtos, 'store'])
       router.put('produtos', [controllers.Produtos, 'edit'])
     })
     router.group(() => {
+      router.get('clientes/:id', [controllers.Clientes, 'show'])
       router.get('clientes', [controllers.Clientes, 'index'])
       router.post('clientes', [controllers.Clientes, 'store'])
       router.put('clientes', [controllers.Clientes, 'edit'])

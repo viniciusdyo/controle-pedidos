@@ -16,3 +16,9 @@ export const editarProdutoValidator = vine.create(
     valorUnidade: vine.number().min(1),
   })
 )
+
+export const buscarProdutoPorIdValidator = vine.create(
+  vine.object({
+    id: vine.number(),
+  })
+)
