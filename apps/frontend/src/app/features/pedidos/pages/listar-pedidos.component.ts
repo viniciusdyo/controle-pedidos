@@ -28,7 +28,7 @@ export class ListarPedidosComponent implements OnInit {
 
   colunasTabela = [
     { textoCabecalho: 'ID', campo: 'id' },
-    { textoCabecalho: 'Cliente', campo: 'cliente' },
+    { textoCabecalho: 'Cliente', campo: 'nomeCliente' },
     { textoCabecalho: 'Valor Total', campo: 'valorTotal' },
     { textoCabecalho: 'Status', campo: 'status' },
   ];
@@ -73,9 +73,14 @@ export class ListarPedidosComponent implements OnInit {
   carregarPedidos() {
     this.carregandoCadastro.set(true);
     this.pedidoService.listarPedidos().subscribe({
-      next: (dados) => {
-        this.listaPedidos.set(dados.dados);
-        console.log(this.listaPedidos(), 'dados API');
+      next: (resposta) => {
+        const pedidosFormatados = resposta.dados.map((pedido) => {
+          return {
+            ...pedido,
+            nomeCliente: pedido.cliente?.nome || 'Cliente não encontrado',
+          };
+        });
+        this.listaPedidos.set(pedidosFormatados);
         this.carregandoCadastro.set(false);
       },
       error: (erro) => {
